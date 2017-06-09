@@ -17,8 +17,7 @@ struct Robo{
 void inicializar(){
 	X = 26.75;
 	Y = 18.25;
-	Z = 19.0;
-	
+	Z = 19.0;	
 	bootAtivo = false;
 	
 	r1.x = 10.0;
