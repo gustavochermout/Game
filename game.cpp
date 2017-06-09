@@ -78,7 +78,7 @@ void corpoDoRobo(double anguloBracoDir, double anguloBracoEsq){
 }
 
 void robo(double x, double y, double z, int lado, double anguloBracoDir, double anguloBracoEsq){
-	 glPushMatrix();
+	glPushMatrix();
 		glTranslatef(x, y/2, z);
 		glRotatef(ladoParaAngulo(lado), 0, 1, 0);
 		corpoDoRobo(anguloBracoDir, anguloBracoEsq);
@@ -100,17 +100,17 @@ void myDisplay(void) {
 	
 	glLoadIdentity();
 	gluLookAt(X, Y, Z,
-			  0, 0, 0,
-		  	  0, 1, 0);
+		0, 0, 0,
+		0, 1, 0);
 		  	  
 	glColor3f(1, 1, 1);
-    base(15);
+	base(15);
   
   	glColor3f(0, 0, 1);
-    robo(r1.x, 0.0, r1.z, r1.lado, r1.anguloBracoDir, r1.anguloBracoEsq);
+	robo(r1.x, 0.0, r1.z, r1.lado, r1.anguloBracoDir, r1.anguloBracoEsq);
     
-    glColor3f(1, 0, 0);
-    robo(r2.x, 0.0, r2.z, r2.lado, r2.anguloBracoDir, r2.anguloBracoEsq);		
+	glColor3f(1, 0, 0);
+	robo(r2.x, 0.0, r2.z, r2.lado, r2.anguloBracoDir, r2.anguloBracoEsq);		
 			
 	glutSwapBuffers();
 }
