@@ -2,7 +2,7 @@
 #include <GL/glut.h> 
 
 double X, Y, Z;
-bool bootAtivo;
+bool botAtivo;
 
 struct Robo{
 
@@ -15,10 +15,10 @@ struct Robo{
 } r1, r2;
 
 void inicializar(){
-	X = 26.75;
+	X = 19.75;
 	Y = 18.25;
 	Z = 19.0;	
-	bootAtivo = false;
+	botAtivo = false;
 	
 	r1.x = 10.0;
 	r1.z = 0.0;
@@ -130,7 +130,7 @@ void socar(struct Robo *robo, int idBraco){
 
 void tecla(unsigned char c, int, int){
 	
-	bootAtivo = true;
+	botAtivo = true;
 	
 	switch(c){
 		//Camera
@@ -157,20 +157,36 @@ void tecla(unsigned char c, int, int){
 	glutPostRedisplay();
 }
 
-void boot(){
-	
-	if (r2.x < (r1.x - 2))
+void bot(){
+
+	if (r1.z < r2.z && r2.z > (r1.z + 2)){
+		r2.lado = 2;
+		r2.z -= passo_robo;
+	}
+	else if (r1.z > r2.z && r2.z < (r1.z - 2)){
+		r2.lado = 4;
+		r2.z += passo_robo;
+	}
+	else if (r1.x > r2.x && r2.x < (r1.x - 2)){
+		r2.lado = 3;
 		r2.x += passo_robo;
-	
-	socar(&r2, 1);	
+	}
+	else if (r1.x < r2.x && r2.x > (r1.x + 2)){
+		r2.lado = 1;
+		r2.x -= passo_robo;
+	}
+	else{
+		socar(&r2, 0);
+		socar(&r2, 1);
+	}			
 }
 
 #define tempo 100
 
 void Timer(int value){
 	
-	if (bootAtivo)
-		boot();
+	if (botAtivo)
+		bot();
 		
 	glutPostRedisplay();
 	glutTimerFunc(tempo, Timer, 1);
